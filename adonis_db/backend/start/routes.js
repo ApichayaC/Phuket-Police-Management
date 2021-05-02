@@ -24,9 +24,4 @@ Route.get('get/:id','PoliceController.getID')
 Route.put('update/:id','PoliceController.update')
 Route.delete('delete/:id','PoliceController.delete')
 
-//position
-Route.post('add', 'PositionController.addPosition')
-Route.get('showsPosition','PositionController.showPosition')
-Route.get('showPosition/:id','PositionController.getIDPosition')
-Route.put('updatePos/:id','PositionController.updatePosition')
-Route.delete('deletePos/:id','PositionController.deletePosition')
+Route.post('import','ImportController.import')

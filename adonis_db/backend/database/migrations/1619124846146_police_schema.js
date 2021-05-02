@@ -10,13 +10,22 @@ class PoliceSchema extends Schema {
       table.string('rank')
       table.string('name')
       table.string('surname')
-      table.string('idcard')
+      table.string('position')
+      
       table.string('dob')
-      table.string('nickname')
-      table.string('sex')
-      table.string('blood')
+
+      table.string('education')
+
+      table.string('training')
+
+      table.string('civil_history')
+      table.string('civil_year')
+
       table.string('reward')
-      table.string('id_position')
+
+      table.string('appoint')
+
+      table.string('telephone')
       table.timestamps()
     })
   }

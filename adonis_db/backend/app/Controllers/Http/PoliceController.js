@@ -9,10 +9,10 @@ const Police = use ("App/Models/Police")
 const Database =use ("Database")
 class PoliceController {
     async show({request, response}){
-        //const polices = await Database.table("police").select("*") ;
-        //response.send(polices)
-         const plc = await Police.query().with('police').fetch()
-        response.send(plc)
+        const polices = await Database.table("police").select("*") ;
+        response.send(polices)
+         //const plc = await Police.query().with('police').fetch()
+        response.send(polices)
 
     }
 
@@ -29,14 +29,16 @@ class PoliceController {
         
         newPolice.rank = body.rank ;
         newPolice.name = body.name ;
-        newPolice.surname = body.surname ;
-        newPolice.idcard = body.idcard ;
+        newPolice.surname = body.surname ;       
+        newPolice.position = body.position ;
         newPolice.dob = body.dob ;
-        newPolice.nickname = body.nickname ;
-        newPolice.sex = body.sex ;
-        newPolice.blood = body.blood ;
+        newPolice.education = body.education ;
+        newPolice.training = body.training ;
+        newPolice.civil_history = body.civil_history ;
+        newPolice.civil_year = body.civil_year ;
         newPolice.reward = body.reward ;
-        newPolice.id_position = body.id_position ;
+        newPolice.appoint = body.appoint ;
+        newPolice.telephone = body.telephone ;
 
         await newPolice.save();
         return response.send("PASS");
@@ -49,14 +51,15 @@ class PoliceController {
         police.rank = body.rank ;
         police.name = body.name ;
         police.surname = body.surname ;
-        police.idcard = body.idcard ;
+        police.position = body.position ;
         police.dob = body.dob ;
-        police.nickname = body.nickname ;
-        police.sex = body.sex ;
-        police.blood = body.blood ;
+        police.education = body.education ;
+        police.training = body.training ;
+        police.civil_history = body.civil_history ;
+        police.civil_year = body.civil_year ;
         police.reward = body.reward ;
-        police.id_position = body.id_position ;
-
+        police.appoint = body.appoint ;
+        police.telephone = body.telephone ;
         await police.save()
         return response.send("PASS!!")
     }
