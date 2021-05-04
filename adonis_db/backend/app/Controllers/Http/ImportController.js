@@ -36,13 +36,13 @@ class ImportController {
                     newPolice.position = explanation.getCell('E' + rowNumber).value;
                     newPolice.dob = explanation.getCell('H' + rowNumber).value;
                     newPolice.education = explanation.getCell('AH' + rowNumber).value + ',' + explanation.getCell('AI' + rowNumber).value + ',' + explanation.getCell('AJ' + rowNumber).value + ',' + explanation.getCell('AK' + rowNumber).value;
-                    
-                    /*newPolice.training = explanation.getCell('H' + rowNumber).value;
-                    newPolice.civil_history = explanation.getCell('H' + rowNumber).value;
-                    newPolice.civil_year = explanation.getCell('H' + rowNumber).value;
-                    newPolice.reward = explanation.getCell('H' + rowNumber).value;
-                    newPolice.appoint = explanation.getCell('H' + rowNumber).value;
-                    newPolice.telephone = explanation.getCell('H' + rowNumber).value;*/
+                    newPolice.telephone = explanation.getCell('AF'+rowNumber).value ;
+                    newPolice.training = explanation.getCell('BX' + rowNumber).value;
+                    newPolice.civil_history = explanation.getCell('BY' + rowNumber).value;
+                    newPolice.civil_year = explanation.getCell('BZ' + rowNumber).value;
+                    newPolice.reward = explanation.getCell('CA' + rowNumber).value;
+                    newPolice.appoint = explanation.getCell('CB' + rowNumber).value;
+                
 
                     await newPolice.save();
                 } catch (error) {

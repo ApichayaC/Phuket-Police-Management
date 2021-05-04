@@ -1,10 +1,14 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import Proflie from '../pages/profile'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+
+import { Button, Input, Radio, Table, Space } from 'antd';
 
 export default function NameList() {
     const URL = 'http://127.0.0.1:3333'
-
+    const router = useRouter()
     const [list, setList] = useState([])
     const [search, setSearch] = useState('');
     const [name, setName] = useState([]);
@@ -12,9 +16,8 @@ export default function NameList() {
         let lists = await axios.get(URL + '/shows')
         console.log(lists)
         setList(Object.assign([], lists.data));
-        setName(Object.assign([],lists.data));
+        setName(Object.assign([], lists.data));
     }
-
     const allName = () => {
         return name.map((item, index) => {
             return (
@@ -23,7 +26,13 @@ export default function NameList() {
                     <td>{item.rank}</td>
                     <td>{item.name}</td>
                     <td>{item.surname}</td>
-                    <button onClick={Proflie} type='button'>แสดงข้อมูล</button>
+                    {/* <Link href='/profile'><button>แสดงข้อมูล</button></Link> */}
+                    <button onClick={() => {
+                        router.push({
+                            pathname: 'profile',
+                            query: { id: item.id }
+                        })
+                    }}>Click</button>
                 </tr>
             )
         })
@@ -48,13 +57,69 @@ export default function NameList() {
 
 
 
+    const columns = [
+        {
+            title: 'ลำดับที่',
+            dataIndex: 'id',
+            key: 'id',
+        },
+        {
+            title: 'ยศ',
+            dataIndex: 'rank',
+            key: 'rank',
+        },
+        {
+            title: 'ชื่อ',
+            dataIndex: 'name',
+            key: 'name',
+        },
+        {
+            title: 'นามสกุล',
+            dataIndex: 'surname',
+            key: 'surname',
+        },
+        {
+            title: 'แสดงข้อมูล',
+            key: 'action',
+            render: (text, record) => (
+                <Space size="middle">
+                    <Button onClick={()=>{
+                        router.push({
+                            pathname: 'profile',
+                            query: { id: record.id }
+                        })
+                    }
+                    }>Click</Button>
+                </Space>
+            ),
+        },
+    ];
     return (
-        <div>
-            <input type='text' onChange={e => setSearch(e.target.value.trim())} />
-            <button onClick={searchName}>Search</button>
-            <table>
-                {allName()}
-            </table>
+        <div >
+            <div>
+
+                <div style={{justifyContent:'center',textAlign:'center',margin:'30px'}}>
+                    <h1>ค้นหารายชื่อ</h1>
+                    <Input  type='text' style={{ width: 300 }} onChange={e => setSearch(e.target.value.trim())} />
+                    <Button  onClick={searchName}>Search</Button>
+                </div>
+                {/* <table>     
+                    <tr>
+                        <td>ลำดับที่</td>
+                        <td>ยศ</td>
+                        <td>ชื่อ</td>     
+                        <td>นามสกุล</td>
+                        <td>แสดงข้อมูล</td>
+                    </tr>
+                    {allName()}
+                </table> */}
+                <Table
+                    pagination={{ position: 'center' }}
+                    dataSource={name}
+                    columns={columns}
+                    
+                    />
+            </div>
         </div>
     )
 }
